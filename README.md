@@ -8,7 +8,7 @@ Download the repository. First start the listener app with `sbt run` in the `lis
 
 Then, start one or more node handlers: `sbt -DPORT=1234 run`. If omitted, the default port is `2552`. Note that for simplicity, each node creates ONE actor and registers with the listener. This code is just meant as an example - for more serious use, you should create some kind of hierarchy and make sure that every new connection is handled by a different actor! 
 
-The listener accepts incoming websocket connections at `ws://127.0.0.1:2551/connect`. Once the connection has been opened, the handling actor will reply with a greeting to any incoming message.
+The listener accepts incoming websocket connections at `ws://127.0.0.1:8080/connect`. Once the connection has been opened, the handling actor will reply with a greeting to any incoming message.
 
 ## License
 
