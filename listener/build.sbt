@@ -4,4 +4,4 @@ organization := "ticofab.io"
 scalaVersion := "2.12.6"
 
 lazy val common = RootProject(file("../common"))
-val main = Project(id = "phone-app", base = file(".")).dependsOn(common)
+val main = Project(id = "listener", base = file(".")).dependsOn(common)
