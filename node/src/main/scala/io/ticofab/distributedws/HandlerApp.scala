@@ -38,11 +38,14 @@ class Handler extends Actor with LogSupport {
       as.actorSelection(RootActorPath(leaderAddress) / "user" / "supervisor") ! RegisterNode)
   }
 
+  // every message this actor sends to the down actorRef will end up in the publisher sink...
   val (down, publisher) = Source
     .actorRef[String](1000, OverflowStrategy.fail)
     .toMat(Sink.asPublisher(fanout = false))(Keep.both)
     .run()
 
+  // ... and every message in the publisher sink will be published by this Source. The final effect is
+  // that messages sent to the down actorRef will be published to this source.
   val streamRef = Source.fromPublisher(publisher).runWith(StreamRefs.sourceRef())
 
   override def receive: Receive = {
